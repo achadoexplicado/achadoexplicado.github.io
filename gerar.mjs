@@ -16,7 +16,8 @@ const entrada = resolve(aqui, process.argv[2] ?? "dados/achados.json");
 const saida = resolve(aqui, process.argv[3] ?? "index.html");
 const dados = JSON.parse(readFileSync(entrada, "utf8"));
 
-const DOMINIOS = ["mercadolivre.com", "mercadolivre.com.br", "mercadolibre.com"];
+// meli.la é o encurtador do Gerador de link do portal de afiliados.
+const DOMINIOS = ["meli.la", "mercadolivre.com", "mercadolivre.com.br", "mercadolibre.com"];
 const REDES = [
   ["Instagram", "https://www.instagram.com/achadoexplicado/"],
   ["YouTube", "https://www.youtube.com/@achadoexplicado"],
