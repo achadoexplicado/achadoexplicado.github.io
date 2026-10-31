@@ -98,19 +98,69 @@
     <main class="largura">
       <p class="aviso"><strong>Links de afiliado.</strong> Os links desta página são do programa de afiliados do Mercado Livre: se você comprar por eles, eu recebo uma comissão e você não paga nada a mais. Os preços são os do dia da consulta e podem mudar.</p>
 
-      <section class="vazio">
-        <h2>Os primeiros achados chegam junto com os vídeos</h2>
-        <p>Cada vídeo compara modelos e faixas de preço. Os produtos citados aparecem aqui, com o preço do dia e o link.</p>
-        <p><a href="https://www.instagram.com/achadoexplicado/">Siga no Instagram</a> para ver quando sair o próximo.</p>
+      <label class="busca">
+        <span>Procurar um produto</span>
+        <input id="busca" type="search" placeholder="ex.: robô aspirador" autocomplete="off" />
+      </label>
+      <p class="sem-resultado" id="sem-resultado" hidden>Nenhum produto com esse nome.</p>
+
+      <section class="video" id="robo-aspirador-qual-escolher">
+        <h2>Robô aspirador: qual escolher</h2>
+        <p class="publicado">Vídeo de 02/11/2026</p>
+        <ul class="cartoes">
+        <li class="cartao" data-busca="wap robot w90 até r$ 500">
+          <span class="furo" aria-hidden="true"></span>
+          <p class="faixa">Até R$ 500</p>
+          <h3 class="nome">WAP Robot W90</h3>
+          <p class="preco"><span>a partir de</span> R$ 350,91</p>
+          <p class="consulta">Preço consultado em 31/10/2026. Pode ter mudado.</p>
+          <a class="botao" href="https://meli.la/1kBPy4P" target="_blank" rel="sponsored noopener">Ver no Mercado Livre<span aria-hidden="true"> →</span></a>
+        </li>
+        <li class="cartao" data-busca="xiaomi robot vacuum s40c (e101) de r$ 500 a r$ 1.500">
+          <span class="furo" aria-hidden="true"></span>
+          <p class="faixa">De R$ 500 a R$ 1.500</p>
+          <h3 class="nome">Xiaomi Robot Vacuum S40C (E101)</h3>
+          <p class="preco"><span>a partir de</span> R$ 939,90</p>
+          <p class="consulta">Preço consultado em 31/10/2026. Pode ter mudado.</p>
+          <a class="botao" href="https://meli.la/15Miv1K" target="_blank" rel="sponsored noopener">Ver no Mercado Livre<span aria-hidden="true"> →</span></a>
+        </li>
+        <li class="cartao" data-busca="xiaomi robot vacuum h40 acima de r$ 1.500">
+          <span class="furo" aria-hidden="true"></span>
+          <p class="faixa">Acima de R$ 1.500</p>
+          <h3 class="nome">Xiaomi Robot Vacuum H40</h3>
+          <p class="preco"><span>a partir de</span> R$ 1.647,88</p>
+          <p class="consulta">Preço consultado em 31/10/2026. Pode ter mudado.</p>
+          <a class="botao" href="https://meli.la/2YCwmk1" target="_blank" rel="sponsored noopener">Ver no Mercado Livre<span aria-hidden="true"> →</span></a>
+        </li>
+        </ul>
       </section>
     </main>
 
     <footer>
       <div class="largura">
         <p>Achado Explicado. Itens práticos para casa, comparados com os dados dos anúncios.</p>
-        
+        <p>Atualizado em 02/11/2026.</p>
       </div>
     </footer>
 
+    <script>
+      const busca = document.getElementById("busca");
+      const aviso = document.getElementById("sem-resultado");
+      busca.addEventListener("input", () => {
+        const termo = busca.value.trim().toLowerCase();
+        let total = 0;
+        document.querySelectorAll(".video").forEach((secao) => {
+          let visiveis = 0;
+          secao.querySelectorAll(".cartao").forEach((c) => {
+            const mostra = !termo || c.dataset.busca.includes(termo);
+            c.hidden = !mostra;
+            if (mostra) visiveis++;
+          });
+          secao.hidden = visiveis === 0;
+          total += visiveis;
+        });
+        aviso.hidden = total > 0;
+      });
+    </script>
   </body>
 </html>
