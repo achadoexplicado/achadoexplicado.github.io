@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Achado Explicado · central de achados</title>
+    <meta name="description" content="Os produtos dos vídeos do Achado Explicado: itens práticos para casa comparados por faixa de preço. Links de afiliado do Mercado Livre." />
+    <meta property="og:title" content="Achado Explicado · central de achados" />
+    <meta property="og:description" content="Comparo antes de você comprar. Itens práticos para casa." />
+    <meta property="og:image" content="https://achadoexplicado.github.io/assets/compartilhar.png" />
+    <meta property="og:url" content="https://achadoexplicado.github.io/" />
+    <meta name="theme-color" content="#18c964" />
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Oswald:wght@500;700&display=swap" rel="stylesheet" />
+    <style>
+      :root {
+        --verde: #18c964;
+        --verde-escuro: #0f8a44;
+        --grafite: #1c1c1e;
+        --papel: #f4f1ea;
+        --etiqueta: #fbfaf6;
+        --cinza: #5c5a55;
+        --display: "League Gothic", "Arial Narrow", Impact, sans-serif;
+        --texto: "Oswald", "Arial Narrow", Arial, sans-serif;
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      body { background: var(--papel); color: var(--grafite); font-family: var(--texto); font-weight: 500; line-height: 1.4; }
+      a { color: inherit; }
+      a:focus-visible, input:focus-visible { outline: 3px solid var(--grafite); outline-offset: 3px; }
+      .largura { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+
+      header { background: var(--verde); padding: 28px 0 24px; }
+      .marca { display: flex; align-items: center; gap: 14px; }
+      .marca img { width: 64px; height: 64px; border-radius: 50%; border: 3px solid var(--grafite); }
+      .marca h1 { font-family: var(--display); font-weight: 400; font-size: 46px; line-height: 0.9; letter-spacing: 0.01em; }
+      .marca p { font-weight: 700; font-size: 15px; letter-spacing: 0.04em; text-transform: uppercase; margin-top: 4px; }
+      .redes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; list-style: none; }
+      .redes a { display: inline-block; padding: 6px 12px; background: var(--grafite); color: var(--papel); text-decoration: none; font-weight: 700; font-size: 14px; letter-spacing: 0.03em; border-radius: 4px; }
+
+      .aviso { background: var(--grafite); color: var(--papel); padding: 14px 16px; border-radius: 6px; margin: 20px 0; font-size: 15px; }
+      .aviso strong { color: var(--verde); }
+
+      .busca { display: block; margin-bottom: 8px; }
+      .busca span { display: block; font-weight: 700; font-size: 14px; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 6px; }
+      .busca input { width: 100%; padding: 12px 14px; font: inherit; font-size: 17px; border: 3px solid var(--grafite); border-radius: 6px; background: var(--etiqueta); }
+
+      .video { margin: 28px 0 36px; scroll-margin-top: 16px; }
+      .video h2, .vazio h2 { font-family: var(--display); font-weight: 400; font-size: 36px; line-height: 1; }
+      .publicado { color: var(--cinza); font-size: 14px; margin-top: 4px; }
+      .cartoes { list-style: none; display: grid; gap: 14px; margin-top: 14px; }
+      @media (min-width: 640px) { .cartoes { grid-template-columns: 1fr 1fr; } }
+
+      /* Cada produto é uma etiqueta de preço, como nos vídeos */
+      .cartao {
+        position: relative;
+        background: var(--etiqueta);
+        padding: 16px 16px 16px 48px;
+        clip-path: polygon(26px 0, 100% 0, 100% 100%, 26px 100%, 0 50%);
+        filter: drop-shadow(0 4px 0 rgba(28, 28, 30, 0.14));
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .furo { position: absolute; left: 12px; top: calc(50% - 8px); width: 16px; height: 16px; border-radius: 50%; border: 3px solid var(--grafite); background: var(--papel); }
+      .faixa { align-self: flex-start; background: var(--verde); padding: 2px 8px; font-weight: 700; font-size: 13px; letter-spacing: 0.05em; text-transform: uppercase; }
+      .nome { font-weight: 700; font-size: 19px; line-height: 1.2; }
+      .preco { font-family: var(--display); font-size: 34px; line-height: 1; margin-top: 2px; }
+      .preco span { font-family: var(--texto); font-weight: 500; font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; }
+      .consulta { color: var(--cinza); font-size: 13px; }
+      .botao { margin-top: 8px; align-self: stretch; text-align: center; background: var(--grafite); color: var(--papel); text-decoration: none; font-weight: 700; font-size: 16px; letter-spacing: 0.03em; padding: 11px 12px; border-radius: 4px; }
+      .botao:hover { background: var(--verde-escuro); }
+
+      .vazio { margin: 28px 0 40px; background: var(--etiqueta); border-radius: 6px; padding: 20px 18px; border-left: 8px solid var(--verde); }
+      .vazio p { margin-top: 10px; font-size: 16px; }
+      .sem-resultado { margin: 20px 0; font-size: 16px; }
+
+      footer { border-top: 3px solid var(--grafite); padding: 18px 0 32px; color: var(--cinza); font-size: 14px; }
+      footer p + p { margin-top: 6px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="largura">
+        <div class="marca">
+          <img src="assets/icone.png" alt="" width="64" height="64" />
+          <div>
+            <h1>Achado Explicado</h1>
+            <p>Comparo antes de você comprar</p>
+          </div>
+        </div>
+        <ul class="redes"><li><a href="https://www.instagram.com/achadoexplicado/">Instagram</a></li><li><a href="https://www.youtube.com/@achadoexplicado">YouTube</a></li><li><a href="https://www.pinterest.com/achadoexplicado/">Pinterest</a></li></ul>
+      </div>
+    </header>
+
+    <main class="largura">
+      <p class="aviso"><strong>Links de afiliado.</strong> Os links desta página são do programa de afiliados do Mercado Livre: se você comprar por eles, eu recebo uma comissão e você não paga nada a mais. Os preços são os do dia da consulta e podem mudar.</p>
+
+      <section class="vazio">
+        <h2>Os primeiros achados chegam junto com os vídeos</h2>
+        <p>Cada vídeo compara modelos e faixas de preço. Os produtos citados aparecem aqui, com o preço do dia e o link.</p>
+        <p><a href="https://www.instagram.com/achadoexplicado/">Siga no Instagram</a> para ver quando sair o próximo.</p>
+      </section>
+    </main>
+
+    <footer>
+      <div class="largura">
+        <p>Achado Explicado. Itens práticos para casa, comparados com os dados dos anúncios.</p>
+        
+      </div>
+    </footer>
+
+  </body>
+</html>
