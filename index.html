@@ -104,7 +104,7 @@
       </label>
       <p class="sem-resultado" id="sem-resultado" hidden>Nenhum produto com esse nome.</p>
 
-      <section class="video" id="air-fryer-erros-ao-comprar">
+      <section class="video" id="air-fryer-erros-ao-comprar" hidden data-publica="2026-11-04T10:00:00-03:00">
         <h2>Air fryer: 3 erros ao comprar</h2>
         <p class="publicado">Vídeo de 04/11/2026</p>
         <ul class="cartoes">
@@ -170,11 +170,25 @@
     <footer>
       <div class="largura">
         <p>Achado Explicado. Itens práticos para casa, comparados com os dados dos anúncios.</p>
-        <p>Atualizado em 04/11/2026.</p>
+        <p>Atualizado em <span id="atualizado" data-data="2026-11-02">02/11/2026</span>.</p>
       </div>
     </footer>
 
     <script>
+      // Vídeo agendado: aparece quando chega o horário de sair nas redes; antes disso sai da página.
+      const atualizado = document.getElementById("atualizado");
+      document.querySelectorAll(".video[data-publica]").forEach((secao) => {
+        if (Date.parse(secao.dataset.publica) > Date.now()) return secao.remove();
+        secao.hidden = false;
+        const data = secao.dataset.publica.slice(0, 10);
+        if (atualizado && data > atualizado.dataset.data) {
+          atualizado.dataset.data = data;
+          atualizado.textContent = data.split("-").reverse().join("/");
+        }
+      });
+      // A seção revelada agora não existia quando o navegador tentou ir para a âncora do link.
+      if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+
       const busca = document.getElementById("busca");
       const aviso = document.getElementById("sem-resultado");
       busca.addEventListener("input", () => {

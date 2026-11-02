@@ -16,6 +16,12 @@ const entrada = resolve(aqui, process.argv[2] ?? "dados/achados.json");
 const saida = resolve(aqui, process.argv[3] ?? "index.html");
 const dados = JSON.parse(readFileSync(entrada, "utf8"));
 
+// Os vídeos saem às 10h de Brasília. Até esse horário a seção do vídeo fica fora da página,
+// para ninguém ver produtos de um vídeo que ainda não saiu.
+const HORARIO = "T10:00:00-03:00";
+const agora = Date.now();
+const noAr = (v) => Date.parse(v.publicado + HORARIO) <= agora;
+
 // meli.la é o encurtador do Gerador de link do portal de afiliados.
 const DOMINIOS = ["meli.la", "mercadolivre.com", "mercadolivre.com.br", "mercadolibre.com"];
 const REDES = [
@@ -59,7 +65,7 @@ const real = (n) => new Intl.NumberFormat("pt-BR", { style: "currency", currency
 const dataBR = (d) => d.split("-").reverse().join("/");
 
 const videos = [...dados.videos].sort((a, b) => b.publicado.localeCompare(a.publicado));
-const datas = videos.flatMap((v) => [v.publicado, ...(v.produtos ?? []).map((p) => p.consultadoEm)]);
+const datas = videos.filter(noAr).flatMap((v) => [v.publicado, ...(v.produtos ?? []).map((p) => p.consultadoEm)]);
 const atualizado = datas.sort().at(-1);
 
 function cartao(p) {
@@ -76,7 +82,7 @@ function cartao(p) {
 
 function secao(v) {
   return `
-      <section class="video" id="${esc(v.id)}">
+      <section class="video" id="${esc(v.id)}"${noAr(v) ? "" : ` hidden data-publica="${esc(v.publicado + HORARIO)}"`}>
         <h2>${esc(v.titulo)}</h2>
         <p class="publicado">Vídeo de ${dataBR(v.publicado)}</p>
         <ul class="cartoes">${(v.produtos ?? []).map(cartao).join("")}
@@ -206,13 +212,27 @@ ${videos.map(secao).join("\n")}`
     <footer>
       <div class="largura">
         <p>Achado Explicado. Itens práticos para casa, comparados com os dados dos anúncios.</p>
-        ${atualizado ? `<p>Atualizado em ${dataBR(atualizado)}.</p>` : ""}
+        ${atualizado ? `<p>Atualizado em <span id="atualizado" data-data="${atualizado}">${dataBR(atualizado)}</span>.</p>` : ""}
       </div>
     </footer>
 ${
   videos.length
     ? `
     <script>
+      // Vídeo agendado: aparece quando chega o horário de sair nas redes; antes disso sai da página.
+      const atualizado = document.getElementById("atualizado");
+      document.querySelectorAll(".video[data-publica]").forEach((secao) => {
+        if (Date.parse(secao.dataset.publica) > Date.now()) return secao.remove();
+        secao.hidden = false;
+        const data = secao.dataset.publica.slice(0, 10);
+        if (atualizado && data > atualizado.dataset.data) {
+          atualizado.dataset.data = data;
+          atualizado.textContent = data.split("-").reverse().join("/");
+        }
+      });
+      // A seção revelada agora não existia quando o navegador tentou ir para a âncora do link.
+      if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+
       const busca = document.getElementById("busca");
       const aviso = document.getElementById("sem-resultado");
       busca.addEventListener("input", () => {
