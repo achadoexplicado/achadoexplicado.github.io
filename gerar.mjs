@@ -18,9 +18,11 @@ const dados = JSON.parse(readFileSync(entrada, "utf8"));
 
 // Os vídeos saem às 10h de Brasília. Até esse horário a seção do vídeo fica fora da página,
 // para ninguém ver produtos de um vídeo que ainda não saiu.
+// Um vídeo pode sair em outro horário: campo opcional "hora": "HH:MM" (Brasília).
 const HORARIO = "T10:00:00-03:00";
+const horario = (v) => (v.hora ? `T${v.hora}:00-03:00` : HORARIO);
 const agora = Date.now();
-const noAr = (v) => Date.parse(v.publicado + HORARIO) <= agora;
+const noAr = (v) => Date.parse(v.publicado + horario(v)) <= agora;
 
 // meli.la é o encurtador do Gerador de link do portal de afiliados.
 const DOMINIOS = ["meli.la", "mercadolivre.com", "mercadolivre.com.br", "mercadolibre.com"];
@@ -40,6 +42,7 @@ for (const v of dados.videos) {
   ids.add(v.id);
   if (!v.titulo) erros.push(`${onde}: falta o título`);
   if (!dataValida(v.publicado)) erros.push(`${onde}: "publicado" precisa ser AAAA-MM-DD`);
+  if (v.hora !== undefined && !/^([01]\d|2[0-3]):[0-5]\d$/.test(v.hora)) erros.push(`${onde}: "hora" precisa ser HH:MM`);
   for (const p of v.produtos ?? []) {
     const ondeP = `${onde}, produto "${p.nome ?? "?"}"`;
     if (!p.nome) erros.push(`${ondeP}: falta o nome`);
@@ -64,7 +67,7 @@ const esc = (s) =>
 const real = (n) => new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" }).format(n);
 const dataBR = (d) => d.split("-").reverse().join("/");
 
-const videos = [...dados.videos].sort((a, b) => b.publicado.localeCompare(a.publicado));
+const videos = [...dados.videos].sort((a, b) => (b.publicado + horario(b)).localeCompare(a.publicado + horario(a)));
 const datas = videos.filter(noAr).flatMap((v) => [v.publicado, ...(v.produtos ?? []).map((p) => p.consultadoEm)]);
 const atualizado = datas.sort().at(-1);
 
@@ -82,7 +85,7 @@ function cartao(p) {
 
 function secao(v) {
   return `
-      <section class="video" id="${esc(v.id)}"${noAr(v) ? "" : ` hidden data-publica="${esc(v.publicado + HORARIO)}"`}>
+      <section class="video" id="${esc(v.id)}"${noAr(v) ? "" : ` hidden data-publica="${esc(v.publicado + horario(v))}"`}>
         <h2>${esc(v.titulo)}</h2>
         <p class="publicado">Vídeo de ${dataBR(v.publicado)}</p>
         <ul class="cartoes">${(v.produtos ?? []).map(cartao).join("")}

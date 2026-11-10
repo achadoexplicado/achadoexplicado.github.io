@@ -104,6 +104,35 @@
           "link": "https://meli.la/2Q1caF1"
         }
       ]
+    },
+    {
+      "id": "esquenta-11-11-baixaram",
+      "titulo": "Esquenta 11.11: 3 achados que baixaram de preço",
+      "publicado": "2026-11-10",
+      "hora": "18:00",
+      "produtos": [
+        {
+          "faixa": "Era R$ 254 em 31/10 · só 127 V",
+          "nome": "Air Fryer Elgin Quad Fry 4,2 L (só 127V)",
+          "precoAPartirDe": 159.9,
+          "consultadoEm": "2026-11-10",
+          "link": "https://meli.la/12CMcag"
+        },
+        {
+          "faixa": "Era R$ 181 em 08/11 · preço no Pix",
+          "nome": "Perfect Pro Mop Move 16L",
+          "precoAPartirDe": 140.76,
+          "consultadoEm": "2026-11-10",
+          "link": "https://meli.la/2Q1caF1"
+        },
+        {
+          "faixa": "Era R$ 350,91 em 31/10 · preço no Pix",
+          "nome": "WAP Robot W90",
+          "precoAPartirDe": 299.9,
+          "consultadoEm": "2026-11-10",
+          "link": "https://meli.la/1kBPy4P"
+        }
+      ]
     }
   ]
 }
