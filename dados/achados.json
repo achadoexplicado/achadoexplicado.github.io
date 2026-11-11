@@ -161,6 +161,35 @@
           "link": "https://meli.la/1nyN8gF"
         }
       ]
+    },
+    {
+      "id": "ofertas-do-dia-11-11",
+      "titulo": "11.11 com cupom: TV, fechadura e extratora",
+      "publicado": "2026-11-11",
+      "hora": "18:00",
+      "produtos": [
+        {
+          "faixa": "TV · com o cupom de R$ 200 pra TVs Samsung (até 15/11): R$ 2.298,05 no Pix",
+          "nome": "Samsung Smart TV 50\" Mini LED 4K M75H",
+          "precoAPartirDe": 2488.05,
+          "consultadoEm": "2026-11-11",
+          "link": "https://meli.la/23G1bG5"
+        },
+        {
+          "faixa": "Fechadura · a mais vendida · só senha · preço no Pix",
+          "nome": "Fechadura Digital Intelbras FR 101 V",
+          "precoAPartirDe": 196,
+          "consultadoEm": "2026-11-11",
+          "link": "https://meli.la/17EVtuA"
+        },
+        {
+          "faixa": "Casa · cupom de 10% no anúncio (até 12/11): R$ 377,93 no Pix",
+          "nome": "Extratora WAP Spot Cleaner W3",
+          "precoAPartirDe": 419.92,
+          "consultadoEm": "2026-11-11",
+          "link": "https://meli.la/2RntRqg"
+        }
+      ]
     }
   ]
 }
