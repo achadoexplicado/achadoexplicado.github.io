@@ -190,6 +190,34 @@
           "link": "https://meli.la/2RntRqg"
         }
       ]
+    },
+    {
+      "id": "climatizador-vale-a-pena",
+      "titulo": "Climatizador: vale a pena?",
+      "publicado": "2026-11-13",
+      "produtos": [
+        {
+          "faixa": "Pra mesa: refresca só quem tá na frente · USB, 10 W",
+          "nome": "Climatizador de Ar Portátil NOHARA 600 mL",
+          "precoAPartirDe": 41.9,
+          "consultadoEm": "2026-11-12",
+          "link": "https://meli.la/24SBKhL"
+        },
+        {
+          "faixa": "Pro quarto: o mais vendido · 220 V · até 20 m²",
+          "nome": "Climatizador Ventisol Clin 16 L (220 V)",
+          "precoAPartirDe": 383.48,
+          "consultadoEm": "2026-11-12",
+          "link": "https://meli.la/2VCUZPn"
+        },
+        {
+          "faixa": "Pro quarto: o mesmo Ventisol em 127 V",
+          "nome": "Climatizador Ventisol Clin 16 L (127 V)",
+          "precoAPartirDe": 383.96,
+          "consultadoEm": "2026-11-12",
+          "link": "https://meli.la/2Yg8o2g"
+        }
+      ]
     }
   ]
 }
